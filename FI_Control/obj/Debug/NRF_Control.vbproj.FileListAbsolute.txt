@@ -1,0 +1,16 @@
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\bin\Debug\FI_Control_Ver1.0.exe.config
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\bin\Debug\FI_Control_Ver1.0.exe.manifest
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\bin\Debug\FI_Control_Ver1.0.application
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\bin\Debug\FI_Control_Ver1.0.exe
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\bin\Debug\FI_Control_Ver1.0.pdb
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\bin\Debug\FI_Control_Ver1.0.xml
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\obj\Debug\FI_Control.Resources.resources
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\obj\Debug\NRF_Control.vbproj.GenerateResource.cache
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\obj\Debug\NRF_Control.vbproj.CoreCompileInputs.cache
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\obj\Debug\FI_Control_Ver1.0.TrustInfo.xml
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\obj\Debug\FI_Control_Ver1.0.exe.manifest
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\obj\Debug\FI_Control_Ver1.0.application
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\obj\Debug\FI_Control_Ver1.0.exe
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\obj\Debug\FI_Control_Ver1.0.xml
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\obj\Debug\FI_Control_Ver1.0.pdb
+C:\Users\FI\Desktop\stm32_nrf\Visual studio\NRF_Control\FI_Control\obj\Debug\NRF_Control.vbprojAssemblyReference.cache

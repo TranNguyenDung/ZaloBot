@@ -1,0 +1,17 @@
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\bin\x86\Debug\FI_Control_Ver1.0.exe.config
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\bin\x86\Debug\FI_Control_Ver1.0.exe.manifest
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\bin\x86\Debug\FI_Control_Ver1.0.application
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\bin\x86\Debug\FI_Control_Ver1.0.exe
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\bin\x86\Debug\FI_Control_Ver1.0.pdb
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\bin\x86\Debug\FI_Control_Ver1.0.xml
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\FI_Control.Resources.resources
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\TriggerKey_Control.vbproj.GenerateResource.cache
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\TriggerKey_Control.vbproj.CoreCompileInputs.cache
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\FI_Control_Ver1.0.TrustInfo.xml
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\FI_Control_Ver1.0.exe.manifest
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\FI_Control_Ver1.0.application
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\FI_Control_Ver1.0.exe
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\FI_Control_Ver1.0.xml
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\FI_Control_Ver1.0.pdb
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\TriggerKey_Control.vbprojAssemblyReference.cache
+D:\My Project\TriggerKey\Visual studio\TriggerKey_Control\FI_Control\obj\x86\Debug\FI_Control.Form1.resources
