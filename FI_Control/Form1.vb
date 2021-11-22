@@ -8,13 +8,17 @@ Imports System.Reflection
 
 Public Class Form1
     'Set form
-    Private Const VER = "1.3"   'Add event serial recive data
+    Private Const VER = "1.5 "   'Add Find comp altium
+    'Private Const VER = "1.4"   'Add Find comp altium
+    'Private Const VER = "1.3"   'Add event serial recive data
     'Private Const VER = "1.2"   'Check data on windown
     'Private Const VER = "1.1"   'Begin add name com
     'Private Const VER = "1.0"   'Begin add name com
 
     Private Const FORM_WIDTH = 700
     Private Const FORM_HEIGHT = 550
+
+    Private Const FIND_FOOTPRINT = "Find FootPrint"
 
     Private Coler1 As Color
     Private Coler2 As Color
@@ -85,6 +89,10 @@ Public Class Form1
     Private btnScanApp As Button
     Private txtList As TextBox
 
+    Private btnFindNext As Button
+    Private btnFindBack As Button
+
+    Private intFindFootprint As Integer = 0
 
 
     Public Sub New()
@@ -323,6 +331,9 @@ Public Class Form1
             txtInit(txtSpace)
             txtInit(txtSpaceHight)
             btnInit(btnMouseLocation)
+            btnInit(btnFindNext)
+            btnInit(btnFindBack)
+
         End With
 
         With Me
@@ -415,6 +426,7 @@ Public Class Form1
             cmbTypeDo.Items.Add("D2.Hidden Value")
             cmbTypeDo.Items.Add("Al.MoveComp")
             cmbTypeDo.Items.Add("RF007.TX-Idle")
+            cmbTypeDo.Items.Add(FIND_FOOTPRINT)
             cmbTypeDo.SelectedIndex = 0
             AddHandler cmbTypeDo.SelectedIndexChanged, AddressOf cmbTypeDo_SelectIndexChange
 
@@ -482,6 +494,24 @@ Public Class Form1
             btn_set(btnMouseLocation, "btnMouseLocation", "Get location Mouse 5s", 10, Coler1, s_x, s_y, lc_x, lc_y)
             grpPartition(0).Controls.Add(btnMouseLocation)
             AddHandler btnMouseLocation.Click, AddressOf btn_click
+
+            'btnInit(btnFindNext)
+            s_x = 130
+            s_y = 50
+            lc_x = btnMouseLocation.Location.X '+ btnMouseLocation.Width + 2
+            lc_y = btnMouseLocation.Location.Y + btnMouseLocation.Height + 5
+            btn_set(btnFindNext, "btnFindNext", "FindNext", 10, Coler1, s_x, s_y, lc_x, lc_y)
+            grpPartition(0).Controls.Add(btnFindNext)
+            AddHandler btnFindNext.Click, AddressOf btn_click
+
+            'btnInit(btnFindBack)
+            s_x = 130
+            s_y = 50
+            lc_x = btnFindNext.Location.X + btnFindNext.Width + 2
+            lc_y = btnFindNext.Location.Y ' + btnFindNext.Height + 5
+            btn_set(btnFindBack, "btnFindBack", "FindBack", 10, Coler1, s_x, s_y, lc_x, lc_y)
+            grpPartition(0).Controls.Add(btnFindBack)
+            AddHandler btnFindBack.Click, AddressOf btn_click
 
             'btnInit(btnScanApp)
             s_x = grpPartition(1).Width - 10
@@ -1386,6 +1416,10 @@ ERROR_END:
                 btnDo_Click()
             ElseIf strDmy.StartsWith("btnMouseLocation") = True Then
                 btnMouseLocation_Click()
+            ElseIf strDmy.StartsWith("btnFindNext") = True Then
+                FindNext()
+            ElseIf strDmy.StartsWith("btnFindBack") = True Then
+                FindPre()
             Else
                 Debug.WriteLine(strDmy)
             End If
@@ -1433,20 +1467,7 @@ ERROR_END:
         'cmbTypeDo.Text = "Al.MoveComp"
         'txtSource.Text = "SW807"
 
-        'Check txt source
-        If txtSource.Text = "" Then
-            GoTo ERROR_END
-        End If
-        'Check cmbDo
-        If cmbTypeDo.SelectedIndex = 0 Then
-            If txtSourceRef.Text = "" Then
-                GoTo ERROR_END
-            End If
-        ElseIf cmbTypeDo.SelectedIndex = 1 Then
-            If txtSourceRef.Text = "" Then
-                GoTo ERROR_END
-            End If
-        End If
+
         'Check Ref
         Dim strKey As String = ""
 
@@ -1461,6 +1482,27 @@ ERROR_END:
         'cmbTypeDo.Items.Add("D2.Hidden Value")
 
         If cmbTypeDo.Text.Contains("D2.Change FootPrint") = True Then
+            Dim result As DialogResult = MessageBox.Show("You want?", "D2.Change FootPrint", MessageBoxButtons.YesNo)
+            If (result = DialogResult.OK) Then
+            Else
+                GoTo ERROR_END
+            End If
+
+            'Check txt source
+            If txtSource.Text = "" Then
+                GoTo ERROR_END
+            End If
+            'Check cmbDo
+            If cmbTypeDo.SelectedIndex = 0 Then
+                If txtSourceRef.Text = "" Then
+                    GoTo ERROR_END
+                End If
+            ElseIf cmbTypeDo.SelectedIndex = 1 Then
+                If txtSourceRef.Text = "" Then
+                    GoTo ERROR_END
+                End If
+            End If
+
             'Debug.WriteLine(txtSource.Text)
             For Each data As String In txtSource.Text.Split(vbCrLf)
                 data = data.Replace(vbCrLf, "")
@@ -1648,7 +1690,20 @@ ERROR_END:
         ElseIf cmbTypeDo.Text.Contains("D2.Hidden Value") = True Then
             MsgBox("Null")
         ElseIf cmbTypeDo.Text.Contains("Al.MoveComp") = True Then
-            'MsgBox(cmbTypeDo.Text)
+            'Check txt source
+            If txtSource.Text = "" Then
+                GoTo ERROR_END
+            End If
+            'Check cmbDo
+            If cmbTypeDo.SelectedIndex = 0 Then
+                If txtSourceRef.Text = "" Then
+                    GoTo ERROR_END
+                End If
+            ElseIf cmbTypeDo.SelectedIndex = 1 Then
+                If txtSourceRef.Text = "" Then
+                    GoTo ERROR_END
+                End If
+            End If
 
             'cmbTypeDo.Text = "Al.MoveComp"
             'txtSource.Text = "SW807"
@@ -1720,8 +1775,65 @@ ERROR_END:
                 End Try
                 WaitTm(GetRandom(1500, 3000))
             End While
-        End If
 
+        ElseIf cmbTypeDo.Text.Contains(FIND_FOOTPRINT) = True Then
+            'Check txt source
+            If txtSource.Text = "" Then
+                GoTo ERROR_END
+            End If
+            Dim poslen As Integer = 0
+            Dim poshight As Integer = 0
+            Key.init()
+            intFindFootprint = 0
+
+
+#If 0 Then
+            For Each data As String In txtSource.Text.Split(vbCrLf)
+                data = data.Replace(vbCrLf, "")
+                data = data.Replace(vbLf, "")
+                data = data.Replace(vbLf, "")
+                If cmbTarget.SelectedIndex = 0 Then
+                    GoTo ERROR_END
+                Else
+                    If data <> "" Then
+                        WaitTm(100)
+                        NextApp(cmbTarget.Text, 0)
+                        SetMousePos(931, 556)
+                        WaitTm(10)
+                        LeftClick()
+                        WaitTm(50)
+                        strKey = Key.CTRL & Key.ff
+                        Try
+                            SendKeys.Send(strKey)
+                        Catch ex As Exception
+                            MsgBox(data)
+                            GoTo ERROR_END
+                        End Try
+                        WaitTm(100)
+                        Try
+                            SendKeys.Send(data)
+                        Catch ex As Exception
+                            MsgBox(data)
+                            GoTo ERROR_END
+                        End Try
+                        WaitTm(100)
+
+                        Try
+                            SendKeys.Send(Key.ENTER)
+                        Catch ex As Exception
+                            MsgBox(data)
+                            GoTo ERROR_END
+                        End Try
+
+                        WaitTm(500)
+                    Else
+                        poslen = 0
+                        poshight = poshight + 1
+                    End If
+                End If
+            Next
+#End If
+        End If
 
         WaitTm(500)
         'MsgBox("Finish")
@@ -1732,6 +1844,141 @@ ERROR_END:
         WaitTm(500)
         setLabelText(lblStatus, "Error")
         Exit Sub
+    End Sub
+
+    Private Sub FindNext()
+        'Check txt source
+        If txtSource.Text = "" Then
+            GoTo ERROR_END
+        End If
+        Dim poslen As Integer = 0
+        Dim poshight As Integer = 0
+        Dim strData As String = ""
+        Key.init()
+        Dim strKey As String = ""
+        For Each data As String In txtSource.Text.Split(vbCrLf)
+            data = data.Replace(vbCrLf, "")
+            data = data.Replace(vbLf, "")
+            data = data.Replace(vbLf, "")
+            If cmbTarget.SelectedIndex = 0 Then
+                GoTo ERROR_END
+            Else
+                If (poslen < intFindFootprint) Then
+                    poslen = poslen + 1
+                Else
+                    If data <> "" Then
+                        WaitTm(100)
+                        NextApp(cmbTarget.Text, 0)
+                        SetMousePos(931, 556)
+                        WaitTm(10)
+                        LeftClick()
+                        WaitTm(50)
+                        strKey = Key.CTRL & Key.ff
+                        Try
+                            SendKeys.Send(strKey)
+                        Catch ex As Exception
+                            MsgBox(data)
+                            GoTo ERROR_END
+                        End Try
+                        WaitTm(100)
+                        Try
+                            SendKeys.Send(data)
+                        Catch ex As Exception
+                            MsgBox(data)
+                            GoTo ERROR_END
+                        End Try
+                        WaitTm(100)
+
+                        Try
+                            SendKeys.Send(Key.ENTER)
+                        Catch ex As Exception
+                            MsgBox(data)
+                            GoTo ERROR_END
+                        End Try
+                        strData = data
+                        WaitTm(500)
+                    End If
+
+                    GoTo WORK_END
+                End If
+            End If
+        Next
+
+WORK_END:
+        intFindFootprint = intFindFootprint + 1
+        'MsgBox(strData)
+ERROR_END:
+
+    End Sub
+
+    Private Sub FindPre()
+        'Check txt source
+        If txtSource.Text = "" Then
+            GoTo ERROR_END
+        End If
+        Dim poslen As Integer = 0
+        Dim poshight As Integer = 0
+        Key.init()
+        Dim strKey As String = ""
+        Dim strData As String = ""
+
+        For Each data As String In txtSource.Text.Split(vbCrLf)
+            data = data.Replace(vbCrLf, "")
+            data = data.Replace(vbLf, "")
+            data = data.Replace(vbLf, "")
+            If cmbTarget.SelectedIndex = 0 Then
+                GoTo ERROR_END
+            Else
+                If (poslen < intFindFootprint) Then
+                    poslen = poslen + 1
+                Else
+                    If data <> "" Then
+                        WaitTm(100)
+                        NextApp(cmbTarget.Text, 0)
+                        SetMousePos(931, 556)
+                        WaitTm(10)
+                        LeftClick()
+                        WaitTm(50)
+                        strKey = Key.CTRL & Key.ff
+                        Try
+                            SendKeys.Send(strKey)
+                        Catch ex As Exception
+                            MsgBox(data)
+                            GoTo ERROR_END
+                        End Try
+                        WaitTm(100)
+                        Try
+                            SendKeys.Send(data)
+                        Catch ex As Exception
+                            MsgBox(data)
+                            GoTo ERROR_END
+                        End Try
+                        WaitTm(100)
+
+                        Try
+                            SendKeys.Send(Key.ENTER)
+                        Catch ex As Exception
+                            MsgBox(data)
+                            GoTo ERROR_END
+                        End Try
+                        strData = data
+                        WaitTm(500)
+                    End If
+
+                    GoTo WORK_END
+                End If
+            End If
+        Next
+
+WORK_END:
+        If (intFindFootprint > 0) Then
+            intFindFootprint = intFindFootprint - 1
+        End If
+        'MsgBox(strData)
+
+
+ERROR_END:
+
     End Sub
 
     Public Function GetRandom(ByVal Min As Integer, ByVal Max As Integer) As Integer
@@ -1881,7 +2128,10 @@ ERROR_END:
         If System.IO.File.Exists(strPath & "\" & "Boot.TriggerKey") Then
             ReadFile(strPath, "Boot.TriggerKey")
         End If
-        serialPort = New SerialPort With {.PortName = cmbCOM.Text, .BaudRate = 115200, .Parity = 0, .DataBits = 8, .StopBits = 1}
+        If (cmbCOM.Items.Count > 0) Then
+            serialPort = New SerialPort With {.PortName = cmbCOM.Text, .BaudRate = 115200, .Parity = 0, .DataBits = 8, .StopBits = 1}
+        End If
+
 
         'LeftClick()
         'RightClick()
@@ -1911,7 +2161,9 @@ ERROR_END:
             End If
         Next
         If blComCheck = False Then
-            cmbCOM.SelectedIndex = 0
+            If (cmbCOM.Items.Count > 0) Then
+                cmbCOM.SelectedIndex = 0
+            End If
         End If
 
         'Read key set

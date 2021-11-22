@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>...\publish\SendKey_Ver1.3\|...\publish\SendKey_Ver1.2\|...\publish\SendKey_Ver1.1\|...\publish\SendKey_Ver1.0\|...\publish\FI_Control_Ver1.0\</PublishUrlHistory>
+    <PublishUrlHistory>..\publish\SendKey_Ver1.5\|..\publish\SendKey_Ver1.4\|...\publish\SendKey_Ver1.4\|...\publish\SendKey_Ver1.3\|...\publish\SendKey_Ver1.2\</PublishUrlHistory>
     <InstallUrlHistory />
     <SupportUrlHistory />
     <UpdateUrlHistory />
